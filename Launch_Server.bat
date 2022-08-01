@@ -1,141 +1,141 @@
-ï»¿::å˜é‡:[Title = æ ‡é¢˜],[Java_Path = Javaè·¯å¾„],[MaxRAM = æœ€å¤§å†…å­˜],[Server_Name = æœåŠ¡ç«¯æ–‡ä»¶åç§°],[Countdown = é‡å¯å€’è®¡æ—¶],[Command = å‘½ä»¤è¾“å…¥]
-::è·³è½¬æ ‡ç­¾:[Check_additional_parameters = æ£€æŸ¥é™„åŠ å‚æ•°],[Check_Config = æ£€æŸ¥é…ç½®æ–‡ä»¶],[Set_Config = è®¾ç½®é…ç½®æ–‡ä»¶],[Select_start_method = é€‰æ‹©å¯åŠ¨æ–¹å¼],[Config_Modification = ä¿®æ”¹é…ç½®æ–‡ä»¶],[ç¥–ä¼ ä»£ç ],[Command = å‘½ä»¤è¾“å…¥],
+::±äÁ¿:[Title = ±êÌâ],[Java_Path = JavaÂ·¾¶],[MaxRAM = ×î´óÄÚ´æ],[Server_Name = ·þÎñ¶ËÎÄ¼þÃû³Æ],[Countdown = ÖØÆôµ¹¼ÆÊ±],[Command = ÃüÁîÊäÈë]
+::Ìø×ª±êÇ©:[Check_additional_parameters = ¼ì²é¸½¼Ó²ÎÊý],[Check_Config = ¼ì²éÅäÖÃÎÄ¼þ],[Set_Config = ÉèÖÃÅäÖÃÎÄ¼þ],[Select_start_method = Ñ¡ÔñÆô¶¯·½Ê½],[Config_Modification = ÐÞ¸ÄÅäÖÃÎÄ¼þ],[×æ´«´úÂë],[Command = ÃüÁîÊäÈë],
 @echo off
-::åˆå§‹åŒ–ç¨‹åº
+::³õÊ¼»¯³ÌÐò
 set Title=Launch_Server
 set Java_Path=java
 
-::æ£€æŸ¥é™„åŠ å‚æ•°
+::¼ì²é¸½¼Ó²ÎÊý
 :Check_additional_parameters
 if /I "%1"=="Command" cls & goto Command
 
-::æ£€æŸ¥é…ç½®æ–‡ä»¶
+::¼ì²éÅäÖÃÎÄ¼þ
 :Check_Config
 if exist Config.bat (
-    echo å‘çŽ°é…ç½®æ–‡ä»¶
+    echo ·¢ÏÖÅäÖÃÎÄ¼þ
     call Config.bat
     goto Select_start_method
 ) else (
-    echo æœªå‘çŽ°é…ç½®æ–‡ä»¶
-    echo è¯·æ‰‹åŠ¨å¡«å†™ä¸€äº›å¿…è¦çš„ä¿¡æ¯ï¼Œå°†ä»¥æ­¤ä¸ºåŸºç¡€åˆ›å»ºé…ç½®æ–‡ä»¶
+    echo Î´·¢ÏÖÅäÖÃÎÄ¼þ
+    echo ÇëÊÖ¶¯ÌîÐ´Ò»Ð©±ØÒªµÄÐÅÏ¢£¬½«ÒÔ´ËÎª»ù´¡´´½¨ÅäÖÃÎÄ¼þ
     goto Set_Config
 )
 
-::è®¾ç½®é…ç½®æ–‡ä»¶
+::ÉèÖÃÅäÖÃÎÄ¼þ
 :Set_Config
 title %Title%
-choice /C YN /N /M "è¿™ä¸ªè®¾å¤‡æœ‰å¤šä¸ªJavaæˆ–æ²¡æœ‰JAVA_HOME?å¸Œæœ›æŒ‡å®šä¸€ä¸ªJavaè·¯å¾„?(Y/N):"
+choice /C YN /N /M "Õâ¸öÉè±¸ÓÐ¶à¸öJava»òÃ»ÓÐJAVA_HOME?Ï£ÍûÖ¸¶¨Ò»¸öJavaÂ·¾¶?(Y/N):"
 if /I %ERRORLEVEL%==1 (
-    echo Javaå®‰è£…è·¯å¾„ ä¾‹:D:\Program_Files\Java\jdk-17.0.2\bin\java.exe
-    set /P Java-Path="è¾“å…¥Javaå®‰è£…è·¯å¾„:"
-    echo å·²ä½¿ç”¨è‡ªå®šä¹‰Javaè·¯å¾„
+    echo Java°²×°Â·¾¶ Àý:D:\Program_Files\Java\jdk-17.0.2\bin\java.exe
+    set /P Java-Path="ÊäÈëJava°²×°Â·¾¶:"
+    echo ÒÑÊ¹ÓÃ×Ô¶¨ÒåJavaÂ·¾¶
 )
 if /I %ERRORLEVEL%==2 (
     set Java-Path=java
-    echo å·²ä½¿ç”¨é»˜è®¤javaè·¯ç»
+    echo ÒÑÊ¹ÓÃÄ¬ÈÏjavaÂ·¾­
 )
-set /P MaxRAM="è¾“å…¥ä½ å¸Œæœ›åˆ†é…ç»™æœåŠ¡å™¨çš„å†…å­˜[æ ¼å¼:?Gæˆ–?M]:"
-set /P Server_Name="è¾“å…¥æœåŠ¡ç«¯æ–‡ä»¶çš„åç§°åŒ…æ‹¬åŽç¼€'.jar':"
-set /P Countdown="è¾“å…¥é‡å¯å€’è®¡æ—¶:"
-echo è¯·ç¡®è®¤ä»¥ä¸‹ä¿¡æ¯æ­£ç¡®
-echo åˆ†é…ç»™æœåŠ¡å™¨çš„å†…å­˜:%MaxRAM%
-echo æœåŠ¡ç«¯æ–‡ä»¶:%Server_Name%
-choice /C 12 /N /M "1.ä¿å­˜é…ç½®å¹¶ç»§ç»­ 2.é‡æ–°è¾“å…¥:"
-::ä¿å­˜é…ç½®éƒ¨åˆ†
+set /P MaxRAM="ÊäÈëÄãÏ£Íû·ÖÅä¸ø·þÎñÆ÷µÄÄÚ´æ[¸ñÊ½:?G»ò?M]:"
+set /P Server_Name="ÊäÈë·þÎñ¶ËÎÄ¼þµÄÃû³Æ°üÀ¨ºó×º'.jar':"
+set /P Countdown="ÊäÈëÖØÆôµ¹¼ÆÊ±:"
+echo ÇëÈ·ÈÏÒÔÏÂÐÅÏ¢ÕýÈ·
+echo ·ÖÅä¸ø·þÎñÆ÷µÄÄÚ´æ:%MaxRAM%
+echo ·þÎñ¶ËÎÄ¼þ:%Server_Name%
+choice /C 12 /N /M "1.±£´æÅäÖÃ²¢¼ÌÐø 2.ÖØÐÂÊäÈë:"
+::±£´æÅäÖÃ²¿·Ö
 if %ERRORLEVEL%==1 (
     title %Title%
     if exist Config.bat del Config.bat
-    echo ::çª—å£åç§°>>Config.bat
+    echo ::´°¿ÚÃû³Æ>>Config.bat
     echo set Title=%Title%>>Config.bat
-    echo ::Javaè·¯å¾„>>Config.bat
+    echo ::JavaÂ·¾¶>>Config.bat
     echo set Java-Path=%Java-Path%>>Config.bat
-    echo ::æœ€å¤§åˆ†é…å†…å­˜>>Config.bat
+    echo ::×î´ó·ÖÅäÄÚ´æ>>Config.bat
     echo set MaxRAM=%MaxRAM%>>Config.bat
-    echo ::æœåŠ¡å™¨æ–‡ä»¶åç§°>>Config.bat
+    echo ::·þÎñÆ÷ÎÄ¼þÃû³Æ>>Config.bat
     echo set Server_Name=%Server_Name%>>Config.bat
-    echo ::é‡å¯å€’è®¡æ—¶>>Config.bat
+    echo ::ÖØÆôµ¹¼ÆÊ±>>Config.bat
     echo set Countdown=%Countdown%>>Config.bat
     goto Select_start_method
 )
 if %ERRORLEVEL%==2 goto
 
-::é€‰æ‹©å¯åŠ¨æ–¹å¼
+::Ñ¡ÔñÆô¶¯·½Ê½
 :Select_start_method
 title %Title%
-choice /C 1234 /N /M "1.å¯ç”¨è‡ªåŠ¨é‡å¯ 2.ç¦ç”¨è‡ªåŠ¨é‡å¯ 3.ä¿®æ”¹é…ç½®æ–‡ä»¶å†…å®¹ 4.é€€å‡ºç¨‹åº:"
+choice /C 1234 /N /M "1.ÆôÓÃ×Ô¶¯ÖØÆô 2.½ûÓÃ×Ô¶¯ÖØÆô 3.ÐÞ¸ÄÅäÖÃÎÄ¼þÄÚÈÝ 4.ÍË³ö³ÌÐò:"
 if %ERRORLEVEL%==1 goto Restart_on
 if %ERRORLEVEL%==2 goto Restart_off
 if %ERRORLEVEL%==3 goto Config_Modification
 if %ERRORLEVEL%==4 exit
 
 
-::ä¿®æ”¹é…ç½®æ–‡ä»¶
+::ÐÞ¸ÄÅäÖÃÎÄ¼þ
 :Config_Modification
-choice /C 1234567 /N /M "1.ä¿®æ”¹å‘½ä»¤è¡Œæ˜¾ç¤ºçš„æ–‡å­— 2.ä¿®æ”¹æœåŠ¡å™¨ä½¿ç”¨çš„javaè·¯å¾„ 3.ä¿®æ”¹åˆ†é…ç»™æœåŠ¡å™¨çš„å†…å­˜ 4.ä¿®æ”¹æœåŠ¡ç«¯æ–‡ä»¶çš„åå­— 5.ä¿®æ”¹é‡å¯å€’è®¡æ—¶ 6.ç»“æŸä¿®æ”¹å¹¶é‡æ–°å¯åŠ¨ 7.æ”¾å¼ƒä¿®æ”¹:"
+choice /C 1234567 /N /M "1.ÐÞ¸ÄÃüÁîÐÐÏÔÊ¾µÄÎÄ×Ö 2.ÐÞ¸Ä·þÎñÆ÷Ê¹ÓÃµÄjavaÂ·¾¶ 3.ÐÞ¸Ä·ÖÅä¸ø·þÎñÆ÷µÄÄÚ´æ 4.ÐÞ¸Ä·þÎñ¶ËÎÄ¼þµÄÃû×Ö 5.ÐÞ¸ÄÖØÆôµ¹¼ÆÊ± 6.½áÊøÐÞ¸Ä²¢ÖØÐÂÆô¶¯ 7.·ÅÆúÐÞ¸Ä:"
 if %ERRORLEVEL%==1 (
-    set /P Title="è¾“å…¥å‘½ä»¤è¡Œæ˜¾ç¤ºçš„æ–‡å­—:"
-    echo å‘½ä»¤è¡Œæ˜¾ç¤ºçš„æ–‡å­—å·²ä¿®æ”¹ä¸º%Title%
+    set /P Title="ÊäÈëÃüÁîÐÐÏÔÊ¾µÄÎÄ×Ö:"
+    echo ÃüÁîÐÐÏÔÊ¾µÄÎÄ×ÖÒÑÐÞ¸ÄÎª%Title%
     goto ConfigModification
 )
 if %ERRORLEVEL%==2 (
-    set /P Java-Path="è¾“å…¥æœåŠ¡å™¨ä½¿ç”¨çš„javaè·¯å¾„:"
-    echo æœåŠ¡å™¨ä½¿ç”¨çš„javaè·¯å¾„å·²ä¿®æ”¹ä¸º%Java-Path%
+    set /P Java-Path="ÊäÈë·þÎñÆ÷Ê¹ÓÃµÄjavaÂ·¾¶:"
+    echo ·þÎñÆ÷Ê¹ÓÃµÄjavaÂ·¾¶ÒÑÐÞ¸ÄÎª%Java-Path%
     goto ConfigModification
 )
 if %ERRORLEVEL%==3 (
-    set /P MaxRAM="è¾“å…¥åˆ†é…ç»™æœåŠ¡å™¨çš„å†…å­˜:"
-    echo åˆ†é…ç»™æœåŠ¡å™¨çš„å†…å­˜å·²ä¿®æ”¹ä¸º%MaxRAM%
+    set /P MaxRAM="ÊäÈë·ÖÅä¸ø·þÎñÆ÷µÄÄÚ´æ:"
+    echo ·ÖÅä¸ø·þÎñÆ÷µÄÄÚ´æÒÑÐÞ¸ÄÎª%MaxRAM%
     goto ConfigModification
 )
 if %ERRORLEVEL%==4 (
-    set /P Server_Name="è¾“å…¥æœåŠ¡ç«¯æ–‡ä»¶çš„åå­—:"
-    echo æœåŠ¡ç«¯æ–‡ä»¶çš„åå­—å·²ä¿®æ”¹ä¸º%Server_Name%
+    set /P Server_Name="ÊäÈë·þÎñ¶ËÎÄ¼þµÄÃû×Ö:"
+    echo ·þÎñ¶ËÎÄ¼þµÄÃû×ÖÒÑÐÞ¸ÄÎª%Server_Name%
     goto ConfigModification
 )
 if %ERRORLEVEL%==5 (
-    set /P Countdown="è¾“å…¥é‡å¯å€’è®¡æ—¶:"
-    echo æœåŠ¡ç«¯æ–‡ä»¶çš„åå­—å·²ä¿®æ”¹ä¸º%Countdown%
+    set /P Countdown="ÊäÈëÖØÆôµ¹¼ÆÊ±:"
+    echo ·þÎñ¶ËÎÄ¼þµÄÃû×ÖÒÑÐÞ¸ÄÎª%Countdown%
     goto ConfigModification
 )
 if %ERRORLEVEL%==6 (
     if exist Config.bat del Config.bat
-    echo ::çª—å£åç§°>>Config.bat
+    echo ::´°¿ÚÃû³Æ>>Config.bat
     echo set Title=%Title%>>Config.bat
-    echo ::Javaè·¯å¾„>>Config.bat
+    echo ::JavaÂ·¾¶>>Config.bat
     echo set Java-Path=%Java-Path%>>Config.bat
-    echo ::æœ€å¤§åˆ†é…å†…å­˜>>Config.bat
+    echo ::×î´ó·ÖÅäÄÚ´æ>>Config.bat
     echo set MaxRAM=%MaxRAM%>>Config.bat
-    echo ::æœåŠ¡å™¨æ–‡ä»¶åç§°>>Config.bat
+    echo ::·þÎñÆ÷ÎÄ¼þÃû³Æ>>Config.bat
     echo set Server_Name=%Server_Name%>>Config.bat
-    echo ::é‡å¯å€’è®¡æ—¶>>Config.bat
+    echo ::ÖØÆôµ¹¼ÆÊ±>>Config.bat
     echo set Countdown=%Countdown%>>Config.bat
     cls & %0
 )
 if %ERRORLEVEL%==7 goto Select_start_method
 
-::ç¥–ä¼ ä»£ç 
-::è‡ªåŠ¨é‡å¯å¯ç”¨
+::×æ´«´úÂë
+::×Ô¶¯ÖØÆôÆôÓÃ
 :Restart_on
 cls
 %Java-Path% -jar -Xmx%MaxRAM% %Server_Name%
-echo æœåŠ¡å™¨å…³é—­äº†ï¼å°†åœ¨%Countdown%ç§’åŽé‡æ–°å¯åŠ¨
-msg %USERNAME% /TIME 5 æœåŠ¡å™¨å°†åœ¨%Countdown%ç§’åŽé‡æ–°å¯åŠ¨
-choice /C 12 /N /T %Countdown% /D 1 /M  "æœåŠ¡å™¨å°†åœ¨%Countdown%ç§’åŽé‡æ–°å¯åŠ¨(1.è·³è¿‡ 2.é˜»æ­¢é‡å¯å¹¶é€€å‡ºLaunch_Server):"
+echo ·þÎñÆ÷¹Ø±ÕÁË£¡½«ÔÚ%Countdown%ÃëºóÖØÐÂÆô¶¯
+msg %USERNAME% /TIME 5 ·þÎñÆ÷½«ÔÚ%Countdown%ÃëºóÖØÐÂÆô¶¯
+choice /C 12 /N /T %Countdown% /D 1 /M  "·þÎñÆ÷½«ÔÚ%Countdown%ÃëºóÖØÐÂÆô¶¯(1.Ìø¹ý 2.×èÖ¹ÖØÆô²¢ÍË³öLaunch_Server):"
 if %ERRORLEVEL%==1 goto Restart_on
 if %ERRORLEVEL%==2 exit
 
-::ç¥–ä¼ ä»£ç 
-::è‡ªåŠ¨é‡å¯ç¦ç”¨
+::×æ´«´úÂë
+::×Ô¶¯ÖØÆô½ûÓÃ
 :Restart_off
 cls
 %Java-Path% -jar -Xmx%MaxRAM% %Server_Name% %Additional_start_parameters%
-echo æœåŠ¡å™¨å…³é—­äº†ï¼
-msg %USERNAME% /TIME 5 æœåŠ¡å™¨å…³é—­äº†
+echo ·þÎñÆ÷¹Ø±ÕÁË£¡
+msg %USERNAME% /TIME 5 ·þÎñÆ÷¹Ø±ÕÁË
 pause
 exit
 
-::å‘½ä»¤è¾“å…¥
-::æˆ‘å ‚å ‚å¼€å‘è€…è¦æ˜¯åƒæ™®é€šç”¨æˆ·ä¸€æ ·ï¼Œä¸€æ­¥ä¸€æ­¥çš„è¿è¡Œåˆ°éœ€è¦æµ‹è¯•çš„åœ°æ–¹ï¼Œå²‚ä¸æ˜¯å¾ˆæ‹‰
+::ÃüÁîÊäÈë
+::ÎÒÌÃÌÃ¿ª·¢ÕßÒªÊÇÏñÆÕÍ¨ÓÃ»§Ò»Ñù£¬Ò»²½Ò»²½µÄÔËÐÐµ½ÐèÒª²âÊÔµÄµØ·½£¬Æñ²»ÊÇºÜÀ­
 :Command
 @set /P Command="Command<<"
 %Command%
