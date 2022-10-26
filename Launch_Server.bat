@@ -6,7 +6,6 @@ set Title=Launch_Server
 set Java_Path=java
 set MaxRAM=2G
 set MinRAM=1G
-
 ::检查配置文件
 :Check_Config
 if exist Config.bat (
@@ -18,7 +17,6 @@ if exist Config.bat (
     echo 请手动填写一些必要的信息，将以此为基础创建配置文件
     goto Set_Config
 )
-
 ::设置配置文件
 :Set_Config
 title %Title%
@@ -46,22 +44,15 @@ choice /C 12 /N /M "1.保存配置并继续 2.重新输入:"
 if %ERRORLEVEL%==1 (
     title %Title%
     if exist Config.bat del Config.bat
-    echo ::窗口名称>>Config.bat
     echo set Title=%Title%>>Config.bat
-    echo ::Java路径>>Config.bat
     echo set Java-Path=%Java-Path%>>Config.bat
-    echo ::最大内存>>Config.bat
     echo set MaxRAM=%MaxRAM%>>Config.bat
-    echo ::最小内存>>Config.bat
     echo set MinRAM=%MinRAM%>>Config.bat
-    echo ::服务器文件名称>>Config.bat
     echo set Server_Name=%Server_Name%>>Config.bat
-    echo ::重启倒计时>>Config.bat
     echo set Countdown=%Countdown%>>Config.bat
     goto Pre-Launch_Options
 )
-if %ERRORLEVEL%==2 goto
-
+if %ERRORLEVEL%==2 goto Set_Config
 ::选择启动方式
 :Pre-Launch_Options
 title %Title%
@@ -69,8 +60,6 @@ choice /C 1234 /N /T 10 /D 1 /M "10s后将自动启动服务器(1.跳过倒计时 2.修改配置文
 if %ERRORLEVEL%==1 goto Launch_Server
 if %ERRORLEVEL%==2 goto Config_Modification
 if %ERRORLEVEL%==3 exit
-
-
 ::修改配置文件
 :Config_Modification
 echo 1.修改命令行标题显示的文字
@@ -113,22 +102,15 @@ if %ERRORLEVEL%==6 (
 )
 if %ERRORLEVEL%==7 (
     if exist Config.bat del Config.bat
-    echo ::窗口名称>>Config.bat
     echo set Title=%Title%>>Config.bat
-    echo ::Java路径>>Config.bat
     echo set Java-Path=%Java-Path%>>Config.bat
-    echo ::最大内存>>Config.bat
     echo set MaxRAM=%MaxRAM%>>Config.bat
-    echo ::最小内存>>Config.bat
     echo set MinRAM=%MinRAM%>>Config.bat
-    echo ::服务器文件名称>>Config.bat
     echo set Server_Name=%Server_Name%>>Config.bat
-    echo ::重启倒计时>>Config.bat
     echo set Countdown=%Countdown%>>Config.bat
     cls & %0
 )
 if %ERRORLEVEL%==8 cls & %0
-
 ::启动服务器
 :Launch_Server
 cls
