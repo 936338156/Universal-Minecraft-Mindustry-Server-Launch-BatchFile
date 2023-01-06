@@ -59,8 +59,8 @@ if %ERRORLEVEL%==2 goto SetConfig
 :PreLaunchOptions
 title %title%
 choice /C 1234 /N /T 10 /D 1 /M "10s后将自动启动服务器(1.跳过倒计时(启用自动重启) 2.仅启动一次(禁用自动重启) 3.修改配置文件内容 4.退出程序):"
-if %ERRORLEVEL%==1 goto LaunchServer_0
 if %ERRORLEVEL%==1 set restart=true & goto LaunchServer_0
+if %ERRORLEVEL%==2 set restart=false & goto LaunchServer_0
 if %ERRORLEVEL%==3 goto ConfigModification
 if %ERRORLEVEL%==4 exit
 ::修改配置文件
@@ -116,13 +116,12 @@ if %ERRORLEVEL%==8 %0
 :LaunchServer_1
 cls
 %javaPath% -jar -Xmx%maxRam% -Xms%minRam% .\%serverName%
-if %restart%==true (
-    msg %USERNAME% /TIME %countdown% "服务器关闭，将在%countdown%秒后重新启动服务器"
-    choice /C 12 /N /T %countdown% /D 1 /M  "服务器关闭,将在%countdown%秒后重新启动服务器(1.跳过倒计时 2.阻止重启并退出Launch_Server):"
-    if %ERRORLEVEL%==1 goto LaunchServer_1
-    exit
-) else (
+if %restart%==false (
     echo 服务器已关闭
     pause
     exit
 )
+msg %USERNAME% /TIME %countdown% "服务器关闭，将在%countdown%秒后重新启动服务器"
+choice /C 12 /N /T %countdown% /D 1 /M  "服务器关闭，将在%countdown%秒后重新启动服务器(1.跳过倒计时 2.阻止重启并退出Launch_Server):"
+if %ERRORLEVEL%==1 goto LaunchServer_1
+exit
